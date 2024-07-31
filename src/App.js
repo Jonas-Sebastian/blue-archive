@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import GDDLogo from './GDD_logo.png';
 import TotalAssault from './components/TotalAssaultPage/TotalAssault';
-import RaidStudentList from './components/TotalAssaultPage/RaidStudentList'; // Import RaidStudentList
 
 export default function App() {
   return (
