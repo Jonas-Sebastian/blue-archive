@@ -20,6 +20,10 @@ export default function RaidStudentList() {
       });
   }, []);
 
+  if (!bossName) {
+    return null;
+  }
+
   const filterStudentsForBoss = (filterCondition, isBudget = false) => {
     return students
       .filter(student => {
