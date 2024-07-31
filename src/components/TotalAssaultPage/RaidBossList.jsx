@@ -5,7 +5,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Button from '@mui/material/Button';
 import RaidBossCard from './RaidBossCard';
-import TotalAssaultService from '../../services/TotalAssaultService'; // Import TotalAssaultService
+import TotalAssaultService from '../../services/TotalAssaultService';
 
 export default function RaidBossList() {
     const [totalAssaultBoss, setTotalAssaultBoss] = useState([]);
@@ -36,8 +36,7 @@ export default function RaidBossList() {
     };
 
     const handleCardClick = (bossName) => {
-        console.log(`Navigating to /TotalAssault/${bossName}`);
-        navigate(`/TotalAssault/${bossName}`); // Navigate to RaidStudentList with boss name in URL
+        navigate(`/TotalAssault/${bossName}`);
     };
 
     const currentItems = [];
@@ -84,7 +83,7 @@ export default function RaidBossList() {
                                     key={index}
                                     bossName={totalAssault.name}
                                     imageSrc={`/${totalAssault.name}.png`}
-                                    onClick={() => handleCardClick(totalAssault.name)} // Handle card click
+                                    onClick={() => handleCardClick(totalAssault.name)}
                                 />
                             )
                         ))}

@@ -15,8 +15,8 @@ export default function RaidStudentCard({ studentName, imageSrc, onClick }) {
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 20,
-        overflow: 'hidden', // Ensures that content does not overflow the border
-        position: 'relative', // Enables positioning of child elements relative to this container
+        overflow: 'hidden',
+        position: 'relative',
       }}
     >
       <Paper
@@ -24,7 +24,7 @@ export default function RaidStudentCard({ studentName, imageSrc, onClick }) {
         sx={{
           width: '100%',
           height: '100%',
-          position: 'relative', // Relative positioning to stack text on image
+          position: 'relative',
           backgroundColor: 'rgba(255, 255, 255, 0.85)', // Adjust opacity here
           backdropFilter: 'blur(10px)',
           borderRadius: 5,
@@ -54,7 +54,7 @@ export default function RaidStudentCard({ studentName, imageSrc, onClick }) {
             marginTop: 'auto',
             backgroundColor: 'rgba(255, 255, 255, 0.1)',
           }}
-          variant="h6" // Use h6 to fit better within the card
+          variant="h6"
         >
           {studentName}
         </Typography>

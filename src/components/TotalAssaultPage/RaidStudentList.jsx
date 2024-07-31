@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, Grid } from '@mui/material';
 import RaidStudentCard from './RaidStudentCard';
-import RaidStudentToggle from './RaidStudentToggle'; // Import the new component
-import TotalAssaultService from '../../services/TotalAssaultService'; // Import your service
+import RaidStudentToggle from './RaidStudentToggle';
+import TotalAssaultService from '../../services/TotalAssaultService';
 
 export default function RaidStudentList() {
-  const [view, setView] = useState('recommended'); // State to manage the view
-  const [students, setStudents] = useState([]); // State to manage students
+  const [view, setView] = useState('recommended');
+  const [students, setStudents] = useState([]);
 
   useEffect(() => {
-    // Fetch students when component mounts
     TotalAssaultService.getAllStudents()
       .then(response => {
         setStudents(response.data);
@@ -22,8 +21,6 @@ export default function RaidStudentList() {
   const renderStudentCards = (filterCondition) => {
     return students
       .filter(student => {
-        // Filter students based on the condition (e.g., categories)
-        // Adjust this according to your data structure
         return student.categories.some(category => category.name === filterCondition);
       })
       .map((student, index) => (
@@ -49,7 +46,7 @@ export default function RaidStudentList() {
         sx={{
           backgroundColor: '#128AFA',
           borderRadius: '20px',
-          padding: '1.5%', // Adjusted padding
+          padding: '1.5%',
           boxShadow: '0px 6px 20px rgba(0, 0, 0, 0.5)',
         }}
       >

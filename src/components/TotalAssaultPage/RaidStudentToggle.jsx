@@ -8,19 +8,19 @@ export default function RaidStudentToggle ({ view, setView }) {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            width: '100%', // Make the container take up full width
+            width: '100%',
           }}
         >
           <Button
             onClick={() => setView('recommended')}
             sx={{
-              backgroundColor: view === 'recommended' ? '#0D6EFD' : '#128AFA', // Highlight the active button
+              backgroundColor: view === 'recommended' ? '#0D6EFD' : '#128AFA', // Highlights the active button
               color: 'white',
               '&:hover': {
                 backgroundColor: '#0A58CA',
               },
-              borderRadius: '12px', // Adjust border radius
-              width: '48%', // Adjust width to fit within the container
+              borderRadius: '12px',
+              width: '48%',
             }}
           >
             Recommended
@@ -28,13 +28,13 @@ export default function RaidStudentToggle ({ view, setView }) {
           <Button
             onClick={() => setView('budget')}
             sx={{
-              backgroundColor: view === 'budget' ? '#0D6EFD' : '#128AFA', // Highlight the active button
+              backgroundColor: view === 'budget' ? '#0D6EFD' : '#128AFA', // Highlights the active button
               color: 'white',
               '&:hover': {
                 backgroundColor: '#0A58CA',
               },
-              borderRadius: '12px', // Adjust border radius
-              width: '48%', // Adjust width to fit within the container
+              borderRadius: '12px',
+              width: '48%',
             }}
           >
             Budget
