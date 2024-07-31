@@ -3,8 +3,10 @@ import { Box, Typography, Grid } from '@mui/material';
 import RaidStudentCard from './RaidStudentCard';
 import RaidStudentToggle from './RaidStudentToggle';
 import TotalAssaultService from '../../services/TotalAssaultService';
+import { useParams } from 'react-router-dom';
 
 export default function RaidStudentList() {
+  const { bossName } = useParams();
   const [view, setView] = useState('recommended');
   const [students, setStudents] = useState([]);
 
@@ -18,13 +20,16 @@ export default function RaidStudentList() {
       });
   }, []);
 
-  const renderStudentCards = (filterCondition, isBudget = false) => {
+  const filterStudentsForBoss = (filterCondition, isBudget = false) => {
     return students
       .filter(student => {
-        return student.categories.some(category => category.name === filterCondition);
+        // Check if the student is associated with the current boss
+        const isAssociatedWithBoss = student.total_assaults.some(assault => assault.name === bossName) ||
+                                      student.grand_assaults.some(assault => assault.name === bossName);
+
+        return student.categories.some(category => category.name === filterCondition) && isAssociatedWithBoss;
       })
       .map((student, index) => {
-        // Check if the student is also in budget categories
         const isInBudget = student.categories.some(category => category.name.startsWith('Budget'));
 
         return (
@@ -74,21 +79,21 @@ export default function RaidStudentList() {
               Recommended Students for DPS
             </Typography>
             <Grid container spacing={2} sx={{ marginBottom: '2vh', justifyContent: 'flex-start' }}>
-              {renderStudentCards('DPS')}
+              {filterStudentsForBoss('DPS')}
             </Grid>
 
             <Typography variant="h6" sx={{ color: 'white', marginBottom: '2vh', textAlign: 'left' }}>
               Recommended Students for Tank
             </Typography>
             <Grid container spacing={2} sx={{ marginBottom: '2vh', justifyContent: 'flex-start' }}>
-              {renderStudentCards('Tank')}
+              {filterStudentsForBoss('Tank')}
             </Grid>
 
             <Typography variant="h6" sx={{ color: 'white', marginBottom: '2vh', textAlign: 'left' }}>
               Recommended Students for Boss Unique Abilities
             </Typography>
             <Grid container spacing={2} sx={{ justifyContent: 'flex-start' }}>
-              {renderStudentCards('Boss Unique Abilities')}
+              {filterStudentsForBoss('Boss Unique Abilities')}
             </Grid>
           </>
         ) : (
@@ -97,21 +102,21 @@ export default function RaidStudentList() {
               Budget Students for DPS
             </Typography>
             <Grid container spacing={2} sx={{ marginBottom: '2vh', justifyContent: 'flex-start' }}>
-              {renderStudentCards('Budget DPS', true)}
+              {filterStudentsForBoss('Budget DPS', true)}
             </Grid>
 
             <Typography variant="h6" sx={{ color: 'white', marginBottom: '2vh', textAlign: 'left' }}>
               Budget Students for Tank
             </Typography>
             <Grid container spacing={2} sx={{ marginBottom: '2vh', justifyContent: 'flex-start' }}>
-              {renderStudentCards('Budget Tank', true)}
+              {filterStudentsForBoss('Budget Tank', true)}
             </Grid>
 
             <Typography variant="h6" sx={{ color: 'white', marginBottom: '2vh', textAlign: 'left' }}>
               Budget Students for Boss Unique Abilities
             </Typography>
             <Grid container spacing={2} sx={{ justifyContent: 'flex-start' }}>
-              {renderStudentCards('Budget Boss Unique Abilities', true)}
+              {filterStudentsForBoss('Budget Boss Unique Abilities', true)}
             </Grid>
           </>
         )}
