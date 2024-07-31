@@ -3,7 +3,8 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import GDDLogo from './GDD_logo.png';
-import RaidBossList from './components/RaidBossList';
+import TotalAssault from './components/TotalAssaultPage/TotalAssault';
+import RaidStudentList from './components/TotalAssaultPage/RaidStudentList'; // Import RaidStudentList
 
 export default function App() {
   return (
@@ -13,8 +14,9 @@ export default function App() {
         <main>
           <Routes>
             <Route path="/" element={<img src={GDDLogo} alt="GDD Logo" style={{ paddingTop: '2.5%' }} />} /> {/* Home Page */}
-            <Route path="/TotalAssault" element={<RaidBossList />} /> 
-            <Route path="/GrandAssault" element={null}/> 
+            <Route path="/TotalAssault" element={<TotalAssault />} /> 
+            <Route path="/TotalAssault/:bossName" element={<TotalAssault />} />
+            <Route path="/GrandAssault" element={null} />
           </Routes>
         </main>
       </div>

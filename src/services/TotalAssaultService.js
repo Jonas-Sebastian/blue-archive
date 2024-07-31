@@ -1,26 +1,48 @@
 import axios from 'axios';
 
-const API_URL = 'http://127.0.0.1:8000/api/TotalAssault/';
+const API_URL_TOTAL_ASSAULT = 'http://127.0.0.1:8000/api/TotalAssault/';
+const API_URL_STUDENT = 'http://127.0.0.1:8000/api/Students/';
 
 class TotalAssaultService {
-  getAll() {
-    return axios.get(API_URL);
+  getAllTotalAssault() {
+    return axios.get(API_URL_TOTAL_ASSAULT);
   }
 
-  get(id) {
-    return axios.get(`${API_URL}${id}/`);
+  getTotalAssault(id) {
+    return axios.get(`${API_URL_TOTAL_ASSAULT}${id}/`);
   }
 
-  create(data) {
-    return axios.post(API_URL, data);
+  createTotalAssault(data) {
+    return axios.post(API_URL_TOTAL_ASSAULT, data);
   }
 
-  update(id, data) {
-    return axios.put(`${API_URL}${id}/`, data);
+  updateTotalAssault(id, data) {
+    return axios.put(`${API_URL_TOTAL_ASSAULT}${id}/`, data);
   }
 
-  delete(id) {
-    return axios.delete(`${API_URL}${id}/`);
+  deleteTotalAssault(id) {
+    return axios.delete(`${API_URL_TOTAL_ASSAULT}${id}/`);
+  }
+
+  // New methods for Students
+  getAllStudents() {
+    return axios.get(API_URL_STUDENT);
+  }
+
+  getStudent(id) {
+    return axios.get(`${API_URL_STUDENT}${id}/`);
+  }
+
+  createStudent(data) {
+    return axios.post(API_URL_STUDENT, data);
+  }
+
+  updateStudent(id, data) {
+    return axios.put(`${API_URL_STUDENT}${id}/`, data);
+  }
+
+  deleteStudent(id) {
+    return axios.delete(`${API_URL_STUDENT}${id}/`);
   }
 }
 
