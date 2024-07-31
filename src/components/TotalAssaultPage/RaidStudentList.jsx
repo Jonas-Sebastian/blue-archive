@@ -3,26 +3,33 @@ import { Box, Typography, Grid } from '@mui/material';
 import RaidStudentCard from './RaidStudentCard';
 import RaidStudentToggle from './RaidStudentToggle';
 import TotalAssaultService from '../../services/TotalAssaultService';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 export default function RaidStudentList() {
-  const { bossName } = useParams();
-  const [view, setView] = useState('recommended');
+  const { bossName, view } = useParams(); // Extract both bossName and view from URL
+  const navigate = useNavigate(); // Hook for programmatic navigation
   const [students, setStudents] = useState([]);
 
   useEffect(() => {
-    TotalAssaultService.getAllStudents()
-      .then(response => {
-        setStudents(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching students:', error);
-      });
-  }, []);
+    if (bossName) {
+      // Redirect to default view if none provided
+      if (!view || (view !== 'Recommended' && view !== 'Budget')) {
+        navigate(`/TotalAssault/${bossName}/Recommended`);
+      }
+    }
+  }, [bossName, view, navigate]);
 
-  if (!bossName) {
-    return null;
-  }
+  useEffect(() => {
+    if (bossName) {
+      TotalAssaultService.getAllStudents()
+        .then(response => {
+          setStudents(response.data);
+        })
+        .catch(error => {
+          console.error('Error fetching students:', error);
+        });
+    }
+  }, [bossName]);
 
   const filterStudentsForBoss = (filterCondition, isBudget = false) => {
     return students
@@ -47,6 +54,13 @@ export default function RaidStudentList() {
         );
       });
   };
+
+  if (!bossName) {
+    return null; // TODO: Add a component or message that says no boss is selected
+  }
+
+  //If view is recommended or budget, set that as current view. If neither, set view as recommended
+  const currentView = view === 'Recommended' || view === 'Budget' ? view : 'Recommended';
 
   return (
     <Box
@@ -75,9 +89,9 @@ export default function RaidStudentList() {
             marginBottom: '2vh',
           }}
         >
-          <RaidStudentToggle view={view} setView={setView} />
+          <RaidStudentToggle view={currentView} setView={(newView) => navigate(`/TotalAssault/${bossName}/${newView}`)} /> {/* Pass the view from URL */}
         </Box>
-        {view === 'recommended' ? (
+        {currentView === 'Recommended' ? (
           <>
             <Typography variant="h6" sx={{ color: 'white', marginBottom: '2vh', textAlign: 'left' }}>
               Recommended Students for DPS

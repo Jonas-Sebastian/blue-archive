@@ -15,6 +15,7 @@ export default function App() {
             <Route path="/" element={<img src={GDDLogo} alt="GDD Logo" style={{ paddingTop: '2.5%' }} />} /> {/* Home Page */}
             <Route path="/TotalAssault" element={<TotalAssault />} /> 
             <Route path="/TotalAssault/:bossName" element={<TotalAssault />} />
+            <Route path="/TotalAssault/:bossName/:view" element={<TotalAssault />} />
             <Route path="/GrandAssault" element={null} />
           </Routes>
         </main>
