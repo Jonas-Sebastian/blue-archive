@@ -8,13 +8,19 @@ export default function RaidBossCard({ bossName, imageSrc, onClick }) {
         <ButtonBase
             focusRipple
             onClick={onClick}
-            style={{
+            sx={{
                 width: '12vw',
                 height: '12vh',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                borderRadius: 20,
+                borderRadius: {
+                    xs: '5px',  // Extra small screens
+                    sm: '10px', // Small screens
+                    md: '10px', // Medium screens
+                    lg: '10px', // Large screens
+                    xl: '15px'  // Extra large screens
+                },
             }}
         >
             <Paper
@@ -25,7 +31,13 @@ export default function RaidBossCard({ bossName, imageSrc, onClick }) {
                     position: 'relative',
                     backgroundColor: 'rgba(255, 255, 255, 0.85)', // Adjust opacity here
                     backdropFilter: 'blur(10px)',
-                    borderRadius: 5,
+                    borderRadius: {
+                        xs: '5px',  // Extra small screens
+                        sm: '10px', // Small screens
+                        md: '10px', // Medium screens
+                        lg: '10px', // Large screens
+                        xl: '15px'  // Extra large screens
+                    },
                     overflow: 'hidden',
                 }}
             >
@@ -45,6 +57,7 @@ export default function RaidBossCard({ bossName, imageSrc, onClick }) {
                         textAlign: 'center',
                         width: '100%',
                         marginTop: 'auto',
+                        fontSize: '2vh',
                     }}
                     variant="h5"
                 >

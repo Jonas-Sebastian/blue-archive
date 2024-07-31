@@ -18,19 +18,25 @@ export default function RaidStudentList() {
       });
   }, []);
 
-  const renderStudentCards = (filterCondition) => {
+  const renderStudentCards = (filterCondition, isBudget = false) => {
     return students
       .filter(student => {
         return student.categories.some(category => category.name === filterCondition);
       })
-      .map((student, index) => (
-        <Grid item key={index}>
-          <RaidStudentCard 
-            studentName={student.name} 
-            imageSrc={`/${student.name}.png`}
-          />
-        </Grid>
-      ));
+      .map((student, index) => {
+        // Check if the student is also in budget categories
+        const isInBudget = student.categories.some(category => category.name.startsWith('Budget'));
+
+        return (
+          <Grid item key={index}>
+            <RaidStudentCard 
+              studentName={student.name}
+              imageSrc={`/${student.name}.png`}
+              isBorrowed={isBudget && isInBudget}
+            />
+          </Grid>
+        );
+      });
   };
 
   return (
@@ -91,21 +97,21 @@ export default function RaidStudentList() {
               Budget Students for DPS
             </Typography>
             <Grid container spacing={2} sx={{ marginBottom: '2vh', justifyContent: 'flex-start' }}>
-              {renderStudentCards('Budget DPS')}
+              {renderStudentCards('Budget DPS', true)}
             </Grid>
 
             <Typography variant="h6" sx={{ color: 'white', marginBottom: '2vh', textAlign: 'left' }}>
               Budget Students for Tank
             </Typography>
             <Grid container spacing={2} sx={{ marginBottom: '2vh', justifyContent: 'flex-start' }}>
-              {renderStudentCards('Budget Tank')}
+              {renderStudentCards('Budget Tank', true)}
             </Grid>
 
             <Typography variant="h6" sx={{ color: 'white', marginBottom: '2vh', textAlign: 'left' }}>
               Budget Students for Boss Unique Abilities
             </Typography>
             <Grid container spacing={2} sx={{ justifyContent: 'flex-start' }}>
-              {renderStudentCards('Budget Boss Unique Abilities')}
+              {renderStudentCards('Budget Boss Unique Abilities', true)}
             </Grid>
           </>
         )}
